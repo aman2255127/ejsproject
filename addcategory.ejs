@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+<%- include('../common/header.ejs'); %>
+<!-- END: Head-->
+
+<!-- BEGIN: Body-->
+<body class="vertical-layout vertical-menu-modern navbar-floating footer-static" data-open="click" data-menu="vertical-menu-modern" data-col="">
+
+    <!-- BEGIN: Header-->
+    <%- include('../common/navbar.ejs'); %>
+    <!-- END: Header-->
+
+    <!-- BEGIN: Main Menu-->
+    <%- include('../common/sidebar.ejs'); %>
+    <!-- END: Main Menu-->
+
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row"></div>
+            <div class="content-body">
+                <div class="auth-wrapper">
+                    <div class="auth-inner py-2">
+                        <!-- Add Form -->
+                        <div class="card mb-0">
+                            <div class="card-body">
+                                <form class="auth-register-form" action="/createcategory" method="POST" enctype="multipart/form-data">
+                                    <div class="mb-1">
+                                        <label for="name" class="form-label">Name</label>
+                                        <input type="text" class="form-control" id="name" name="name" required />
+                                    </div>
+                                    <div class="mb-1 mx-auto">
+                                        <label for="image" class="form-label">Image</label>
+                                        <input type="file" class="form-control" id="image" name="image" required />
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Add</button>
+                                    <button type="button" class="btn btn-primary" onclick="window.history.back();">Back</button>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Add Form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    <!-- BEGIN: Footer-->
+    <%- include('../common/footer.ejs'); %>
+    <!-- END: Footer-->
+
+    <!-- BEGIN: Vendor JS-->
+    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+    <!-- END: Vendor JS-->
+</body>
+<!-- END: Body-->
+</html>

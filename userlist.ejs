@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<head>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <%- include('../common/header.ejs'); %>
+    <style>
+        .card-datatable {
+            padding: 20px; 
+        }
+    </style>
+</head>
+
+<body class="vertical-layout vertical-menu-modern navbar-floating footer-static" data-open="click" data-menu="vertical-menu-modern" data-col="">
+
+    <!-- BEGIN: Header-->
+    <%- include('../common/navbar.ejs'); %>
+    <!-- END: Header-->
+
+    <!-- BEGIN: Main Menu-->
+    <%- include('../common/sidebar.ejs'); %>
+    <!-- END: Main Menu-->
+
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-wrapper p-0">
+            <div class="content-body">
+                <!-- users list start -->
+                <section class="app-user-list">
+                    <div class="card">
+                        <div class="card-datatable table-responsive pt-0">
+                            <table id="myTable" class="user-list-table table">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Sr.no</th>
+                                        <th>Name</th>
+                                        <th>Image</th>
+                                        <th>Email</th>
+                                        <th>Phone.no</th>
+                                        <th>Address</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% data.forEach((item, i) => { %>
+                                    <tr data-id="<%= item.id %>">
+                                        <td><%= i + 1 %></td>
+                                        <td><%= item.name %></td>
+                                        <td>
+                                            <img src="../<%= item.image %>" alt="User Image" style="width: 50px; height: 50px; object-fit: cover; border-radius: 10px;">
+                                        </td>
+                                        <td><%= item.email %></td>
+                                        <td><%= item.phone_number %></td>
+                                        <td><%= item.address %></td>
+                                        <td>
+                                            <% if (item.status == 0) { %>
+                                              <a data-id="<%= item.id %>" data-status="0" class="btn btn-info status-toggle">Inactive</a>
+                                            <% } else { %>
+                                              <a data-id="<%= item.id %>" data-status="1" class="btn btn-warning status-toggle">Active</a>
+                                            <% } %>
+                                        </td>
+                                        <td>
+                                            <a href="/view/<%= item.id %>" class="btn btn-success">View</a>
+                                            <a href="#" onclick="deleteUser('<%= item.id %>', event)" class="btn btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- BEGIN: Footer-->
+    <%- include('../common/footer.ejs'); %>
+    <!-- END: Footer-->
+
+    <!-- BEGIN: Vendor JS-->
+    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Your updated script here -->
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable();
+
+            // Event delegation for status toggle button
+            $(document).on("click", ".status-toggle", function() {
+                let button = $(this);
+                let userId = button.attr("data-id");
+                let currentStatus = button.attr("data-status");
+                let newStatus = currentStatus === "1" ? "0" : "1"; 
+
+                $.ajax({
+                    method: "POST",
+                    url: "/status", // Ensure this matches your backend route
+                    data: JSON.stringify({
+                        id: userId,
+                        status: newStatus
+                    }),
+                    contentType: "application/json",
+                    success: function(response) {
+                        if (response.success) {
+                            if (newStatus === "1") {
+                                button.text("Active").removeClass("btn-info").addClass("btn-warning");
+                            } else {
+                                button.text("Inactive").removeClass("btn-warning").addClass("btn-info");
+                            }
+                            button.attr("data-status", newStatus);
+                            toastr.success('Status updated successfully.');
+                        } else {
+                            toastr.error('Status change failed.');
+                        }
+                    },
+                    error: function() {
+                        toastr.error('An error occurred while changing the status.');
+                    }
+                });
+            });
+        });
+
+        function deleteUser(user_id, event) {
+            event.preventDefault(); // Prevent the default action of the link
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success",
+                    cancelButton: "btn btn-danger"
+                },
+                buttonsStyling: false
+            });
+
+            swalWithBootstrapButtons.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel!",
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "POST",
+                        url: `/delete/${user_id}`,
+                        data: { id: user_id },
+                        success: function(response) {
+                            if (response.success) {
+                                swalWithBootstrapButtons.fire("Deleted!", "Your file has been deleted.", "success").then(() => {
+                                    location.reload(); // Reload the page after deletion
+                                });
+                            } else {
+                                swalWithBootstrapButtons.fire("Failed!", "Your file could not be deleted.", "error");
+                            }
+                        },
+                        error: function() {
+                            swalWithBootstrapButtons.fire("Error!", "An error occurred while deleting the file.", "error");
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+</html>

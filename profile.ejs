@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+
+<%- include('../common/header.ejs'); %>
+    <!-- END: Head-->
+
+    <!-- BEGIN: Body-->
+
+    <body class="vertical-layout vertical-menu-modern  navbar-floating footer-static  " data-open="click"
+        data-menu="vertical-menu-modern" data-col="">
+
+        <!-- BEGIN: Header-->
+        <%- include('../common/navbar.ejs'); %>
+            <!-- END: Header-->
+
+
+            <!-- BEGIN: Main Menu-->
+            <%- include('../common/sidebar.ejs'); %>
+                <!-- END: Main Menu-->
+
+                <!-- BEGIN: Content-->
+
+                <div class="app-content content">
+                    <div class="content-overlay"></div>
+                    <div class="header-navbar-shadow"></div>
+                    <div class="content-wrapper">
+                        <div class="content-header row"></div>
+                        <div class="content-body">
+                            <div class="auth-wrapper">
+                                <div class="auth-inner py-2">
+                                    <div class="card mb-0">
+                                        <div class="card-body">
+
+                                            <form class="auth-register-form mt-2" action="/editprofile" method="POST"
+                                                enctype="multipart/form-data">
+                                                <div class="row">
+                                                    <div class="col-md-4 d-flex flex-column align-items-center">
+                                                        <div class="image-container position-relative"
+                                                            style="width: 300px; height: 300px; ">
+                                                            <img src="<%= profile.image %>" alt="Profile Image"
+                                                                style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;">
+
+                                                            <!-- Icon Overlay -->
+                                                            <div class="icon-overlay position-absolute d-flex align-items-center justify-content-center"
+                                                                style="bottom: 10px; right: 10px; cursor: pointer;">
+                                                                <i class="fa-solid  fa-pen-to-square"
+                                                                    style="font-size: 24px; color: white; background: rgba(206, 23, 23, 0.5); padding: 8px; border-radius: 50%;"></i>
+                                                            </div>
+
+
+                                                            <input type="file" id="image" name="image" accept="image/*"
+                                                                style="display: none;" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-8">
+                                                        <div class="mb-1">
+                                                            <label for="register-email" class="form-label">Email</label>
+                                                            <input type="email" class="form-control" id="email"
+                                                                value="<%= profile.email %>" name="email"
+                                                                mailto:placeholder="john@example.com"
+                                                                aria-describedby="register-email" tabindex="2"
+                                                                required />
+                                                        </div>
+                                                        <div class="mb-1">
+                                                            <label for="register-first-name"
+                                                                class="form-label">Name</label>
+                                                                <input type="text" class="form-control" id="name" name="name" value="<%= profile.name %>" required />
+
+                                                        </div>
+
+                                                        <div class="mb-1">
+                                                            <label for="register-phone-number" class="form-label">Phone
+                                                                Number</label>
+                                                            <input type="text" class="form-control" id="phone_number"
+                                                                value="<%= profile.phone_number %>" id="phone_number"
+                                                                name="phone_number" placeholder=""
+                                                                aria-describedby="register-phone-number" tabindex="5"
+                                                                required />
+                                                        </div>
+                                                        <div class="d-flex justify-content-between">
+
+                                                            <button type="submit"
+                                                                class="btn btn-primary">Update</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- /Register v1 -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JavaScript to handle the click event -->
+
+
+
+
+
+                <!-- END: Content-->
+
+                <div class="sidenav-overlay"></div>
+                <div class="drag-target"></div>
+
+                <!-- BEGIN: Footer-->
+                <%- include('../common/footer.ejs'); %>
+                    <!-- END: Footer-->
+
+
+                    <!-- BEGIN: Vendor JS-->
+                    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+                    <!-- BEGIN Vendor JS-->
+
+                    <!-- BEGIN: Page Vendor JS-->
+                    <script src="../../../app-assets/vendors/js/charts/apexcharts.min.js"></script>
+                    <script src="../../../app-assets/vendors/js/extensions/toastr.min.js"></script>
+                    <!-- END: Page Vendor JS-->
+
+                    <!-- BEGIN: Theme JS-->
+                    <script src="../../../app-assets/js/core/app-menu.js"></script>
+                    <script src="../../../app-assets/js/core/app.js"></script>
+                    <!-- END: Theme JS-->
+
+                    <!-- BEGIN: Page JS-->
+                    <script src="../../../app-assets/js/scripts/pages/dashboard-ecommerce.js"></script>
+                    <!-- END: Page JS-->
+
+                    <script>
+                        $(window).on('load', function () {
+                            if (feather) {
+                                feather.replace({
+                                    width: 14,
+                                    height: 14
+                                });
+                            }
+                        });
+                        document.querySelector('.icon-overlay').addEventListener('click', function () {
+                            document.getElementById('image').click();
+                        });
+                    </script>
+    </body>
+    <!-- END: Body-->
+
+</html>

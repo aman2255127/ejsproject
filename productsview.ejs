@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+<%- include('../common/header.ejs'); %>
+<!-- END: Head-->
+
+<!-- BEGIN: Body-->
+<body class="vertical-layout vertical-menu-modern navbar-floating footer-static" data-open="click" data-menu="vertical-menu-modern" data-col="">
+
+    <!-- BEGIN: Header-->
+    <%- include('../common/navbar.ejs'); %>
+    <!-- END: Header-->
+
+    <!-- BEGIN: Main Menu-->
+    <%- include('../common/sidebar.ejs'); %>
+    <!-- END: Main Menu-->
+
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row"></div>
+            <div class="content-body">
+                <div class="auth-wrapper">
+                    <div class="auth-inner py-2">
+                        <!-- Product Details -->
+                        <div class="card mb-0">
+                            <div class="card-body">
+                                <form class="auth-register-form" action="" method="POST">
+                                    <!-- Product Image -->
+                                    <div class="mb-1 mx-auto" style="width: 200px; height: 200px; position: relative; border-radius: 10px; overflow: hidden;">
+                                        <% if (view.image) { %>
+                                            <img src="<%= view.image %>" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover;">
+                                        <% } else { %>
+                                            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #f0f0f0; border: 1px solid #ddd;">
+                                                <span>No Image</span>
+                                            </div>
+                                        <% } %>
+                                    </div>
+
+                                    <!-- Category Name -->
+                                    <div class="mb-1">
+                                        <label for="category_name" class="form-label">Category Name</label>
+                                        <input type="text" class="form-control" id="category_name" name="category_name" readonly 
+                                            value="<%= view.categoriess ? view.categoriess.name : 'No Category' %>" 
+                                            aria-describedby="category_name" tabindex="1" />
+                                    </div>
+
+                                    <!-- Product Name -->
+                                    <div class="mb-1">
+                                        <label for="product_name" class="form-label">Product Name</label>
+                                        <input type="text" class="form-control" id="product_name" name="product_name" readonly 
+                                            value="<%= view.product_name %>" aria-describedby="product_name" tabindex="2" />
+                                    </div>
+
+                                    <!-- Price -->
+                                    <div class="mb-1">
+                                        <label for="price" class="form-label">Price</label>
+                                        <input type="text" class="form-control" id="price" name="price" readonly 
+                                            value="$<%= view.price %>" aria-describedby="price" tabindex="3" />
+                                    </div>
+
+                                    <!-- Back Button -->
+                                    <button type="button" class="btn btn-primary" tabindex="4" onclick="window.history.back();">Back</button>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Product Details -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    <!-- BEGIN: Footer-->
+    <%- include('../common/footer.ejs'); %>
+    <!-- END: Footer-->
+
+    <!-- BEGIN: Vendor JS-->
+    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+    <!-- END: Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="../../../app-assets/vendors/js/charts/apexcharts.min.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/toastr.min.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="../../../app-assets/js/core/app-menu.js"></script>
+    <script src="../../../app-assets/js/core/app.js"></script>
+    <!-- END: Theme JS-->
+</body>
+<!-- END: Body-->
+</html>

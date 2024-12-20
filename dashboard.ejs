@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+<%-include('common/header.ejs')%>
+<!-- END: Head-->
+
+<!-- BEGIN: Body-->
+<body class="vertical-layout vertical-menu-modern navbar-floating footer-static" data-open="click" data-menu="vertical-menu-modern" data-col="">
+
+    <!-- BEGIN: Header-->
+    <%-include('common/navbar.ejs')%>
+    <!-- END: Header-->
+
+    <!-- BEGIN: Main Menu-->
+    <%-include('common/sidebar.ejs')%>
+    <!-- END: Main Menu-->
+
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper container-xxl p-0">
+            <div class="content-header row"></div>
+            <div class="content-body">
+                <!-- Dashboard Ecommerce Starts -->
+                <section id="dashboard-ecommerce">
+                    <div class="row match-height">
+                        <!-- Statistics Card -->
+                        <div class="col-12">
+                            <div class="card card-statistics">
+                                <div class="card-header">
+                                    <h4 class="card-title"></h4>
+                                    <div class="d-flex align-items-center">
+                                    </div>
+                                </div>
+                                <div class="card-body statistics-body">
+                                    <div class="row">
+                                        <!-- First Stat: Trending Up -->
+                                        <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-xl-0">
+                                            <a href="/categorylist" class="d-flex flex-row align-items-center">
+                                                <div class="avatar bg-light-primary me-2">
+                                                    <div class="avatar-content">
+                                                        <i data-feather="command" class="avatar-icon"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="my-auto">
+                                                    <h4 class="fw-bolder mb-0"><%= categoryCount %></h4>
+                                                    <p class="card-text font-small-3 mb-0">Category</p>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <!-- Second Stat: User List (Clickable to /userlist) -->
+                                        <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-xl-0">
+                                            <a href="/userlist" class="text-decoration-none">
+                                                <div class="d-flex flex-row align-items-center">
+                                                    <div class="avatar bg-light-info me-2">
+                                                        <div class="avatar-content">
+                                                            <i data-feather="user" class="avatar-icon"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="my-auto">
+                                                    <h4 class="fw-bolder mb-0"><%= userCount %></h4>
+
+                                        <h4 class="fw-bolder mb-0"></h4>
+                                                        <p class="card-text font-small-3 mb-0">Users</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <!-- Third Stat: Products -->
+                                        <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-sm-0">
+                                            <a href="/productslist" class="d-flex flex-row align-items-center">
+                                                <div class="avatar bg-light-danger me-2">
+                                                    <div class="avatar-content">
+                                                        <i data-feather="box" class="avatar-icon"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="my-auto">    
+                                                    <h4 class="fw-bolder mb-0"><%= productsCount %></h4>
+                                                    <p class="card-text font-small-3 mb-0">Products</p>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <!-- Fourth Stat: Revenue -->
+                                        <!-- <div class="col-xl-3 col-sm-6 col-12">
+                                            <div class="d-flex flex-row align-items-center">
+                                                <div class="avatar bg-light-success me-2">
+                                                    <div class="avatar-content">
+                                                        <i data-feather="dollar-sign" class="avatar-icon"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="my-auto">
+                                                    <h4 class="fw-bolder mb-0">$9745</h4>
+                                                    <p class="card-text font-small-3 mb-0">Revenue</p>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/ Statistics Card -->
+                    </div>
+                </section>
+                <!-- Dashboard Ecommerce ends -->
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    <!-- BEGIN: Footer-->
+    <%-include('common/footer.ejs')%>
+    <button class="btn btn-primary btn-icon scroll-top" type="button"><i data-feather="arrow-up"></i></button>
+    <!-- END: Footer-->
+
+    <!-- BEGIN: Vendor JS-->
+    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="../../../app-assets/vendors/js/charts/apexcharts.min.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/toastr.min.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="../../../app-assets/js/core/app-menu.js"></script>
+    <script src="../../../app-assets/js/core/app.js"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="../../../app-assets/js/scripts/pages/dashboard-ecommerce.js"></script>
+    <!-- END: Page JS-->
+
+    <script>
+        $(window).on('load', function() {
+            if (feather) {
+                feather.replace({
+                    width: 14,
+                    height: 14
+                });
+            }
+        })
+    </script>
+</body>
+</html>

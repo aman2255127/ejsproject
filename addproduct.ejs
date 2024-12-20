@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+  <!-- BEGIN: Head-->
+  <%- include('../common/header.ejs'); %>
+  <!-- END: Head-->
+
+  <!-- BEGIN: Body-->
+  <body
+    class="vertical-layout vertical-menu-modern navbar-floating footer-static"
+    data-open="click"
+    data-menu="vertical-menu-modern"
+    data-col=""
+  >
+    <!-- BEGIN: Header-->
+    <%- include('../common/navbar.ejs'); %>
+    <!-- END: Header-->
+
+    <!-- BEGIN: Main Menu-->
+    <%- include('../common/sidebar.ejs'); %>
+    <!-- END: Main Menu-->
+
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+      <div class="content-overlay"></div>
+      <div class="header-navbar-shadow"></div>
+      <div class="content-wrapper">
+        <div class="content-header row"></div>
+        <div class="content-body">
+          <div class="auth-wrapper">
+            <div class="auth-inner py-2">
+              <!-- Add Form -->
+
+              <div class="card mb-0">
+                <div class="card-body">
+                  <form
+                    class="auth-register-form "
+                    action="/createproducts"
+                    method="POST"
+                    enctype="multipart/form-data" 
+                  >
+                    <div class="form-group row">
+                      <div>
+                        <label for="category" class="col-sm-3 col-form-label">
+                          Category Name</label
+                        >
+
+                        <select
+                          id="select_aut"
+                          name="cat_id"
+                          class="form-control"
+                          required
+                        >
+                          <option readonly>Select an book Product</option>
+                          <!-- Placeholder option -->
+                          <% data.forEach((data) => { %>
+                          <option value="<%= data.id %>"  >
+                            <%= data?.name %>
+                          </option>
+                          <% }) %>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="mb-1 mt-2">
+                      <label for="name" class="form-label">Product Name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="product_name"
+                        name="product_name"
+                        aria-describedby="name"
+                        tabindex="2"
+                        required
+                      />
+                    </div>
+
+                    <div class="mb-1">
+                      <label for="image" class="form-label">Image</label>
+                      <input
+                        type="file"
+                        class="form-control"
+                        id="image"
+                        name="image"
+                        aria-describedby="image"
+                        tabindex="1"
+                        required
+                      />
+                    </div>
+
+                    <div class="mb-1">
+                      <label for="price" class="form-label">Price</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="price"
+                        name="price"
+                        aria-describedby="price"
+                        tabindex="1"
+                      />
+                    </div>
+                                  
+                    <button type="submit" class="btn btn-success" tabindex="3">
+                      Add
+                    </button>
+                    <button onclick="window.location='/productslist'" class="btn btn-primary" tabindex="3">
+                      Back
+                    </button>
+                    
+                    
+
+                  </form>
+                </div>
+              </div>
+              <!-- /Add Form -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END: Content-->
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    <!-- BEGIN: Footer-->
+    <%- include('../common/footer.ejs'); %>
+    <!-- END: Footer-->
+
+    <!-- BEGIN: Vendor JS-->
+    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+    <!-- END: Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="../../../app-assets/vendors/js/charts/apexcharts.min.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/toastr.min.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="../../../app-assets/js/core/app-menu.js"></script>
+    <script src="../../../app-assets/js/core/app.js"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="../../../app-assets/js/scripts/pages/dashboard-ecommerce.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <!-- END: Page JS-->
+
+    <!-- <script>
+      $(window).on("load", function () {
+        if (feather) {
+          feather.replace({
+            width: 14,
+            height: 14,
+          });
+        }
+      });
+    </script>
+    <script>
+      document.querySelector("form").addEventListener("submit", function(event) {
+        const categorySelect = document.getElementById("select_aut");
+        if (categorySelect.value === "Select an book Product") {
+          alert("Please select a category.");
+          event.preventDefault(); // Prevent the form from submitting
+        }
+      });
+    </script> -->
+    
+  </body>
+  <!-- END: Body-->
+</html>
